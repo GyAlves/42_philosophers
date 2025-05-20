@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 18:27:21 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/19 22:42:33 by gyasminalve      ###   ########.fr       */
+/*   Created: 2025/05/20 14:30:05 by gyasminalve       #+#    #+#             */
+/*   Updated: 2025/05/20 14:30:29 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int main(int argc, char **argv)
-{
-    input_parser(argc, argv);
-    return 0;
-}
+/* Functions */
+int		is_valid_integer_format(char *string);
+
+#endif

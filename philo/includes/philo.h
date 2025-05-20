@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:02:51 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/19 21:40:45 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/05/20 14:30:50 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 /* Libs */
 #include <pthread.h>
+#include <stdio.h>
 
 /* Structs */
 typedef struct s_fork t_fork;
@@ -25,5 +26,7 @@ typedef struct s_dinner t_dinner;
 # include "fork.h"
 # include "philosopher.h"
 # include "dinner.h"
+# include "utils.h"
+# include "input_parser.h"
 
 #endif
