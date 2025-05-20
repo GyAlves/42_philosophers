@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:35:53 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/05/20 15:09:34 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/05/20 15:36:49 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void    input_parser(int argc, char **argv)
 {
 	are_parameters_valid(argc, argv);
 
-    // Convert each argument to an integer and assign to the appropriate variable
-        // Since the ms type of variables could be long, can i use atoi to convert them ?
+    // Convert each argument to an integer 
+	    // Since the ms type of variables could be long, can i use atoi to convert them ?
+	
+	// Assign to the appropriate variable
     
     // Verify if optional argument is present and convert it. 
 }
