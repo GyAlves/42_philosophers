@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fork.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:59 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/12 22:06:48 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:45:33 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORK_H
 # define FORK_H
 
-#include "philo.h"
+# include <pthread.h> 
 
 typedef struct s_fork
 {

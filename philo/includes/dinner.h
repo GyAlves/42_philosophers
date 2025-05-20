@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/12 22:07:29 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:03:40 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DINNER_H
 # define DINNER_H
 
-#include "philosopher.h"
-#include "fork.h"
-
+# include "philosopher.h"
+# include "fork.h"
 typedef struct s_dinner
 {
     int number_of_philosophers;
@@ -26,6 +25,8 @@ typedef struct s_dinner
     long long time_to_eat_ms;
     long long time_to_sleep_ms;
     long long dinner_started_ms;
+
+    pthread_mutex_t logging_mutex;
     
     t_philosopher   *array_philosophers;
     t_fork          *array_forks;

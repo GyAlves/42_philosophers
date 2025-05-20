@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:26 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/12 21:59:23 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/19 21:47:35 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
-#include "fork.h"
-
+# include <pthread.h> 
 typedef struct s_philosopher
 {
     int id;
