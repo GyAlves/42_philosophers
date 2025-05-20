@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:35:53 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/05/20 14:54:23 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/05/20 15:09:34 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 void    input_parser(int argc, char **argv)
 {
-    if (argc < 5)
-    {
-        printf("Error: Not enough arguments: %s\n", argv[0]);
-        print_usage();
-        return;
-    }
-
 	are_parameters_valid(argc, argv);
 
     // Convert each argument to an integer and assign to the appropriate variable
@@ -48,7 +41,7 @@ int are_parameters_valid(int argc, char **argv)
 
 void	print_usage(void)
 {
-	printf("Error: Invalid number of arguments\n\n");
+	printf("\nError: Invalid number of arguments\n\n");
 	printf("Usage: ./philo <philosophers> <time_to_die> <time_to_eat> ");
 	printf("<time_to_sleep> [times_to_eat]\n\n");
 	
