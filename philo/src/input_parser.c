@@ -6,17 +6,17 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:35:53 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/05/21 19:10:35 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:51:55 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "dinner.h"
 
-void    input_parser(int argc, char **argv, t_dinner *dinner)
+int	input_parser(int argc, char **argv, t_dinner *dinner)
 {
 	if (!are_parameters_valid(argc, argv))
-		return ;
+		return (0);
 
 	dinner->number_of_philosophers = ft_atoi(argv[1]);
 	dinner->time_to_die_ms = ft_atoll(argv[2]);
@@ -30,39 +30,21 @@ void    input_parser(int argc, char **argv, t_dinner *dinner)
 		dinner->number_of_meals = ft_atoi(argv[5]);
 	else
 		dinner->number_of_meals = -1;
+	
+	return (1);
 }
 
 int	are_parameters_valid(int argc, char **argv)
 {
 	if (!is_valid_philosopher_count(argv[1]))
-	{
-		printf("Error: Invalid number of philosophers\n");
-		print_usage();
-		return (0);
-	}
+		return (check_and_report("Invalid number of philosophers"));
 	if (!is_valid_time_value(argv[2]))
-	{
-		printf("Error: Invalid time to die value\n");
-		print_usage();
-		return (0);
-	}
+		return (check_and_report("Invalid time to die value"));
 	if (!is_valid_time_value(argv[3]))
-	{
-		printf("Error: Invalid time to eat value\n");
-		print_usage();
-		return (0);
-	}
+		return (check_and_report("Invalid time to eat value"));
 	if (!is_valid_time_value(argv[4]))
-	{
-		printf("Error: Invalid time to sleep value\n");
-		print_usage();
-		return (0);
-	}
+		return (check_and_report("Invalid time to sleep value"));
 	if (argc == 6 && !is_valid_meal_count(argv[5]))
-	{
-		printf("Error: Invalid number of meals value\n");
-		print_usage();
-		return (0);
-	}
+		return (check_and_report("Invalid number of meals value"));
 	return (1);
 }

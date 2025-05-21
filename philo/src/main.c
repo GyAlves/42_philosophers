@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:27:21 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/21 17:02:43 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:40:00 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int main(int argc, char **argv)
 {
     t_dinner	dinner;
-    
+                   
     if (argc < 5 || argc > 6)
 	{
 		print_usage();
 		return (1);
 	}
-	
-	input_parser(argc, argv, &dinner);
+
+	if (!input_parser(argc, argv, &dinner))
+        return (1);
 
     // Print dinner struct after initialization
     printf("Dinner struct after initialization:\n");

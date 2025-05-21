@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:30:16 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/21 19:11:29 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:52:26 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,9 @@ void	print_usage(void)
 	printf("      » 200ms to sleep\n\n");
 }
 
-int	check_and_report(const char *message, int valid)
+int	check_and_report(const char *message)
 {
-	if (!valid)
-	{
-		printf("Error: %s\n", message);
-		print_usage();
-		return (0);
-	}
-	return (1);
+	printf("Error: %s\n", message);
+	print_usage();
+	return (0);
 }
