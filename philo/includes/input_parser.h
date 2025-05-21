@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parser.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 22:40:57 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/05/20 14:50:05 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/05/20 21:39:56 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define INPUT_PARSER_H
 
 /* Functions */
-void    input_parser(int argc, char **argv);
-int     are_parameters_valid(int argc, char **argv);
+void    input_parser(int argc, char **argv, t_dinner *dinner);
+int		are_parameters_valid(int argc, char **argv);
 void	print_usage(void);
+int		is_valid_philosopher_count(char *string);
+int		is_valid_time_value(char *string);
+int		is_valid_meal_count(char *string);
 
 #endif

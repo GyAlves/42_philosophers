@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/19 22:03:40 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/05/20 20:49:11 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "philosopher.h"
 # include "fork.h"
+
 typedef struct s_dinner
 {
     int number_of_philosophers;
