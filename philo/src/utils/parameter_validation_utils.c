@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:22:44 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/21 18:51:43 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/26 19:42:39 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_valid_philosopher_count(char *string)
 		return (0);
 	
 	value = ft_atoll(string);
-	return (value > 0 && value <= 200);
+	return (value > 0 && value <= 200 && value <= INT_MAX);
 }
 
 int	is_valid_time_value(char *string)
@@ -31,7 +31,7 @@ int	is_valid_time_value(char *string)
 		return (0);
 	
 	value = ft_atoll(string);
-	return (value > 0 && value < 2147483647);
+	return (value > 0 && value <= INT_MAX);
 }
 
 int	is_valid_meal_count(char *string)
@@ -42,7 +42,7 @@ int	is_valid_meal_count(char *string)
 		return (0);
 	
 	value = ft_atoll(string);
-	return (value > 0 && value <= 2147483647);
+	return (value > 0 && value <= INT_MAX);
 }
 
 int		is_valid_integer_format(char *string)
