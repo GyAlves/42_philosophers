@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/20 20:49:11 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:53:44 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ typedef struct s_dinner
     t_fork          *array_forks;
     
 } t_dinner;
+
+/* Functions */
 
 #endif

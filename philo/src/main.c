@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:27:21 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/26 19:46:35 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:51:42 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int main(int argc, char **argv)
 
 	if (!input_parser(argc, argv, &dinner))
         return (1);
+
+    // Set Up Dinner 
 
     // Print dinner struct after initialization
     printf("Dinner struct after initialization:\n");
