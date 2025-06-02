@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/05/27 21:08:01 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/02 18:11:59 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,6 @@ void    set_up_dinner(t_dinner *dinner)
 {
     table_allocation(dinner);
     init_table(dinner);
+    
+    // init logging mutex
 }
