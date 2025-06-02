@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex_init_utils.c                                 :+:      :+:    :+:   */
+/*   error_handling.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 18:19:16 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/02 19:21:28 by galves-a         ###   ########.fr       */
+/*   Created: 2025/06/02 18:43:09 by galves-a          #+#    #+#             */
+/*   Updated: 2025/06/02 19:07:05 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int init_mutex(pthread_mutex_t *mutex)
-{
-    int result;
+#ifndef ERROR_HANDLING_H
+# define ERROR_HANDLING_H
 
-    result = pthread_mutex_init(mutex, NULL);
-    if (result != 0)
-    {
-        printf("Failed to initialize mutex");
-        return (result);
-    }
-    return (0);
-}
+/* Functions */
+void    mutex_init_error(int mutexes_count, t_dinner *forks);
+
+#endif

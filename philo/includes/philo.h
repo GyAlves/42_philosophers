@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:02:51 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/26 19:39:14 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/02 19:48:58 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <limits.h>
+#include <sys/time.h>
 
 /* Structs */
 typedef struct s_fork t_fork;
@@ -29,5 +30,6 @@ typedef struct s_dinner t_dinner;
 # include "dinner.h"
 # include "utils.h"
 # include "input_parser.h"
+# include "error_handling.h"
 
 #endif

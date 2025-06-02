@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex_init_utils.c                                 :+:      :+:    :+:   */
+/*   time_management_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 18:19:16 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/02 19:21:28 by galves-a         ###   ########.fr       */
+/*   Created: 2025/06/02 19:46:02 by galves-a          #+#    #+#             */
+/*   Updated: 2025/06/02 19:53:16 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int init_mutex(pthread_mutex_t *mutex)
-{
-    int result;
+#include "philo.h"
 
-    result = pthread_mutex_init(mutex, NULL);
-    if (result != 0)
-    {
-        printf("Failed to initialize mutex");
-        return (result);
-    }
-    return (0);
+void    get_time_in_ms(void)
+{
+    struct timeval timestamp;
+    long    time_in_ms;
+    
+    gettimeofday(&timestamp, NULL);
+    time_in_ms = (timestamp.tv_sec * 1000) * (timestamp / 100);
+    return (time_in_ms);
 }
