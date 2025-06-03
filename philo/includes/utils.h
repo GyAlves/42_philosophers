@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:30:05 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/02 19:53:13 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:07:48 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int         is_valid_integer_format(char *string);
 int	        check_and_report(const char *message);
 int         init_mutex(pthread_mutex_t *mutex);
 void	    print_usage(void);
-void        get_time_in_ms(void);
+long long   get_time_in_ms(void);
 long long   ft_atoll(char *string);
 #endif

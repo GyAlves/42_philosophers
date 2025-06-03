@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_set_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/02 19:51:49 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/03 18:07:02 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void philosopher_routine(void)
+void    *philosopher_routine(void* arg)
 {
-    return ;
+    return (arg);
 }
 
 void    init_table(t_dinner *dinner)
@@ -57,7 +57,7 @@ void table_allocation(t_dinner *dinner)
     dinner->array_forks = malloc(sizeof(t_fork) * dinner->number_of_philosophers);
     if (!dinner->array_forks)
     {
-        printf("Failed to allocated memory for forsk");
+        printf("Failed to allocated memory for forks");
         free(dinner->array_philosophers);
         return ;
     }
@@ -67,14 +67,15 @@ void    set_up_dinner(t_dinner *dinner)
 {
     table_allocation(dinner);
     init_table(dinner);
-    init_mutex(dinner->logging_mutex);
+    init_mutex(&dinner->logging_mutex);
     
-    if (init_mutex(&dinner->array_forks[counter].mutex) != 0)
+    if (init_mutex(&dinner->array_forks[0].mutex) != 0)
     {
-        mutex_init_error(counter, dinner->array_forks);
+        mutex_init_error(1, dinner->array_forks);
         return ;
     }
+    dinner->dinner_started_ms = get_time_in_ms();
+    printf("Current time in milliseconds: %lld\n", dinner->dinner_started_ms);
 
-    // start dinner time in ms
-    
+    //clean up function
 }

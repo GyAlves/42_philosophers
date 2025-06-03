@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:44:38 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/02 19:18:10 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:44:51 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    mutex_init_error(int mutexes_count, t_dinner *forks)
+void    mutex_init_error(int mutexes_count, t_fork *forks)
 {
     int counter;
 

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_init_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:19:16 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/02 19:21:28 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:41:01 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 int init_mutex(pthread_mutex_t *mutex)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:02:51 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/02 19:48:58 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:42:35 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <sys/time.h>
+#include <stdlib.h>
 
 /* Structs */
 typedef struct s_fork t_fork;

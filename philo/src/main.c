@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:27:21 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/27 16:51:42 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/03 17:59:18 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
         return (1);
 
     // Set Up Dinner 
+    set_up_dinner(&dinner);
 
     // Print dinner struct after initialization
     printf("Dinner struct after initialization:\n");
