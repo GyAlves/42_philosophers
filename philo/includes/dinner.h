@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/03 17:57:44 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/03 19:42:40 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_dinner
 /* Functions */
 void    *philosopher_routine(void* arg);
 void    init_table(t_dinner *dinner);
-void    table_allocation(t_dinner *dinner);
-void    set_up_dinner(t_dinner *dinner);
+int     table_allocation(t_dinner *dinner);
+int     set_up_dinner(t_dinner *dinner);
 
 #endif

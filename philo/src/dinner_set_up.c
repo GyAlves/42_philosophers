@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/03 18:07:02 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/03 23:58:08 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +46,39 @@ void    init_table(t_dinner *dinner)
     }
 }
 
-void table_allocation(t_dinner *dinner)
+int table_allocation(t_dinner *dinner)
 {
     dinner->array_philosophers = malloc(sizeof(t_philosopher) * dinner->number_of_philosophers);
     if (!dinner->array_philosophers)
     {
         printf("Failed to allocated memory for philosophers");
-        return ;
+        return(0);
     }
     dinner->array_forks = malloc(sizeof(t_fork) * dinner->number_of_philosophers);
     if (!dinner->array_forks)
     {
         printf("Failed to allocated memory for forks");
         free(dinner->array_philosophers);
-        return ;
+        return(0);
     }
+    return (1);
 }
 
-void    set_up_dinner(t_dinner *dinner)
+int set_up_dinner(t_dinner *dinner)
 {
-    table_allocation(dinner);
+    if(!table_allocation(dinner))
+        return (0);
     init_table(dinner);
     init_mutex(&dinner->logging_mutex);
     
     if (init_mutex(&dinner->array_forks[0].mutex) != 0)
     {
         mutex_init_error(1, dinner->array_forks);
-        return ;
+        return (0);
     }
     dinner->dinner_started_ms = get_time_in_ms();
     printf("Current time in milliseconds: %lld\n", dinner->dinner_started_ms);
 
     //clean up function
+    return (1);
 }
