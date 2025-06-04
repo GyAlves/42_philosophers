@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.h                                   :+:      :+:    :+:   */
+/*   cleanup_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 18:43:09 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/04 01:13:17 by gyasminalve      ###   ########.fr       */
+/*   Created: 2025/06/04 00:48:17 by gyasminalve       #+#    #+#             */
+/*   Updated: 2025/06/04 02:00:18 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_HANDLING_H
-# define ERROR_HANDLING_H
+#include "dinner.h"
 
-#include "fork.h"
-
-typedef enum    error_status_code
+void    cleanup_threads(t_dinner *dinner)
 {
-    SUCCESS,
-    ERROR_MALLOC_PHILOSOPHERS,
-    ERROR_MALLOC_FORKS,
-    ERROR_MUTEX_INIT_FORK,
-    ERROR_MUTEX_INIT_LOGGING,
-    ERROR_THREAD_CREATE,
-    ERROR_INVALID_PARAMS
-} t_error_status_code;
+    int counter;
 
-/* Functions */
-void    mutex_init_error(int mutexes_count, t_fork *forks);
+    counter = 0;
+    while (counter < dinner->created_threads)
+    {
+        
+    }
+}
 
-#endif
+void    cleanup_dinner(t_dinner *dinner)
+{
+    // Clean up Forks
+    mutex_init_error(dinner->created_forks, dinner->array_forks);
+
+    // Clean up Threads
+    
+
+    // Free the forks and philosophers memory
+}

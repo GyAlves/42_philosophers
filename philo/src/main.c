@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:27:21 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/03 18:54:29 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 01:43:59 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int main(int argc, char **argv)
 	if (!input_parser(argc, argv, &dinner))
         return (1);
 
-    if(!set_up_dinner(&dinner))
+    set_up_dinner(&dinner);
+    if (dinner.last_error != SUCCESS)
+    {
+        printf("Error initializing dinner: %d", dinner.last_error);
         return (1);
+    }
 
     // Print dinner struct after initialization
     printf("Dinner struct after initialization:\n");
