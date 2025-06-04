@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:30:05 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 01:12:08 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 18:46:06 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int         is_valid_integer_format(char *string);
 int	        check_and_report(const char *message);
 void        init_mutex(pthread_mutex_t *mutex, t_dinner *dinner);
 void	    print_usage(void);
+void        cleanup_threads(t_dinner *dinner);
+void        cleanup_dinner(t_dinner *dinner);
 long long   get_time_in_ms(void);
 long long   ft_atoll(char *string);
 #endif

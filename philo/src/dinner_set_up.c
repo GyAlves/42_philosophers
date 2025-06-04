@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 01:49:20 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 18:47:49 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,5 @@ void    set_up_dinner(t_dinner *dinner)
         dinner->dinner_started_ms = get_time_in_ms();
     }
     else
-    {
-        printf("Cleaning Up");
-    }
+        cleanup_dinner(dinner);
 }
