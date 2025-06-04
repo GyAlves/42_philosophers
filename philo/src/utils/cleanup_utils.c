@@ -6,11 +6,11 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:48:17 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 18:46:56 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 18:49:28 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dinner.h"
+#include "philo.h"
 
 void    cleanup_threads(t_dinner *dinner)
 {
