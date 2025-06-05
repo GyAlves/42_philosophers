@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_set_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/03 23:58:08 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 21:17:21 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ void    init_table(t_dinner *dinner)
     int counter;
 
     counter = 0;
+    if (dinner->last_error != SUCCESS)
+        return ;
+        
     while (counter < dinner->number_of_philosophers)
     {
         dinner->array_forks[counter].id = counter;
         dinner->array_forks[counter].status = 0;
         dinner->array_forks[counter].owner_id = -1;
-        if (init_mutex(&dinner->array_forks[counter].mutex) != 0)
-        {
-            mutex_init_error(counter, dinner->array_forks);
+
+        init_mutex(&dinner->array_forks[counter].mutex, dinner);
+        if (dinner->last_error != SUCCESS)
             return ;
-        }
+        
+        dinner->created_forks += 1;
 
         dinner->array_philosophers[counter].id = counter;
         dinner->array_philosophers[counter].status = PHILOSOPHER_THINKING;
@@ -40,45 +44,50 @@ void    init_table(t_dinner *dinner)
         dinner->array_philosophers[counter].left_fork = &dinner->array_forks[counter];
         dinner->array_philosophers[counter].right_fork = &dinner->array_forks[(counter + 1) % dinner->number_of_philosophers];
         dinner->array_philosophers[counter].dinner = dinner;
-        pthread_create(&dinner->array_philosophers[counter].thread_id, NULL, philosopher_routine, &dinner->array_philosophers[counter]);
-
+        if (pthread_create(&dinner->array_philosophers[counter].thread_id, NULL, philosopher_routine, &dinner->array_philosophers[counter]) != 0)
+        {
+            dinner->last_error = ERROR_THREAD_CREATE;
+            return ;
+        }
+        
+        dinner->created_threads += 1;
         counter++;
     }
 }
 
-int table_allocation(t_dinner *dinner)
+void    table_allocation(t_dinner *dinner)
 {
     dinner->array_philosophers = malloc(sizeof(t_philosopher) * dinner->number_of_philosophers);
     if (!dinner->array_philosophers)
     {
-        printf("Failed to allocated memory for philosophers");
-        return(0);
+        dinner->last_error = ERROR_MALLOC_PHILOSOPHERS;
+        return ;
     }
     dinner->array_forks = malloc(sizeof(t_fork) * dinner->number_of_philosophers);
     if (!dinner->array_forks)
     {
-        printf("Failed to allocated memory for forks");
+        dinner->last_error = ERROR_MALLOC_FORKS;
         free(dinner->array_philosophers);
-        return(0);
+        return ;
     }
-    return (1);
 }
 
-int set_up_dinner(t_dinner *dinner)
+void    set_up_dinner(t_dinner *dinner)
 {
-    if(!table_allocation(dinner))
-        return (0);
-    init_table(dinner);
-    init_mutex(&dinner->logging_mutex);
-    
-    if (init_mutex(&dinner->array_forks[0].mutex) != 0)
-    {
-        mutex_init_error(1, dinner->array_forks);
-        return (0);
-    }
-    dinner->dinner_started_ms = get_time_in_ms();
-    printf("Current time in milliseconds: %lld\n", dinner->dinner_started_ms);
+    dinner->last_error = SUCCESS;
+    dinner->initialization_complete = 0;
+    dinner->initialized_mutexes = 0;
+    dinner->created_forks = 0;
+    dinner->created_threads = 0;
 
-    //clean up function
-    return (1);
+    table_allocation(dinner);
+    init_table(dinner);
+
+    if (dinner->last_error == SUCCESS)
+    {
+        dinner->initialization_complete = 1;
+        dinner->dinner_started_ms = get_time_in_ms();
+    }
+    else
+        cleanup_dinner(dinner);
 }

@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/03 19:42:40 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 00:54:14 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DINNER_H
 
 # include "philosopher.h"
+# include "error_handling.h"
 # include "fork.h"
 
 typedef struct s_dinner
@@ -31,13 +32,19 @@ typedef struct s_dinner
     
     t_philosopher   *array_philosophers;
     t_fork          *array_forks;
+
+    t_error_status_code last_error;
+    int initialization_complete;
+    int initialized_mutexes;
+    int created_forks;
+    int created_threads;
     
 } t_dinner;
 
 /* Functions */
 void    *philosopher_routine(void* arg);
 void    init_table(t_dinner *dinner);
-int     table_allocation(t_dinner *dinner);
-int     set_up_dinner(t_dinner *dinner);
+void    table_allocation(t_dinner *dinner);
+void    set_up_dinner(t_dinner *dinner);
 
 #endif
