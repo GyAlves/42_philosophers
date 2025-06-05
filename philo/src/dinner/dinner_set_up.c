@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 21:17:21 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:48:55 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,48 +27,13 @@ void    init_table(t_dinner *dinner)
         
     while (counter < dinner->number_of_philosophers)
     {
-        dinner->array_forks[counter].id = counter;
-        dinner->array_forks[counter].status = 0;
-        dinner->array_forks[counter].owner_id = -1;
-
-        init_mutex(&dinner->array_forks[counter].mutex, dinner);
+        fork_allocation(dinner, counter);
         if (dinner->last_error != SUCCESS)
             return ;
-        
-        dinner->created_forks += 1;
-
-        dinner->array_philosophers[counter].id = counter;
-        dinner->array_philosophers[counter].status = PHILOSOPHER_THINKING;
-        dinner->array_philosophers[counter].last_meal_ms = 0;
-        dinner->array_philosophers[counter].number_of_meals = 0;
-        dinner->array_philosophers[counter].left_fork = &dinner->array_forks[counter];
-        dinner->array_philosophers[counter].right_fork = &dinner->array_forks[(counter + 1) % dinner->number_of_philosophers];
-        dinner->array_philosophers[counter].dinner = dinner;
-        if (pthread_create(&dinner->array_philosophers[counter].thread_id, NULL, philosopher_routine, &dinner->array_philosophers[counter]) != 0)
-        {
-            dinner->last_error = ERROR_THREAD_CREATE;
+        philosopher_allocation(dinner, counter);
+        if (dinner->last_error != SUCCESS)
             return ;
-        }
-        
-        dinner->created_threads += 1;
         counter++;
-    }
-}
-
-void    table_allocation(t_dinner *dinner)
-{
-    dinner->array_philosophers = malloc(sizeof(t_philosopher) * dinner->number_of_philosophers);
-    if (!dinner->array_philosophers)
-    {
-        dinner->last_error = ERROR_MALLOC_PHILOSOPHERS;
-        return ;
-    }
-    dinner->array_forks = malloc(sizeof(t_fork) * dinner->number_of_philosophers);
-    if (!dinner->array_forks)
-    {
-        dinner->last_error = ERROR_MALLOC_FORKS;
-        free(dinner->array_philosophers);
-        return ;
     }
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/04 00:54:14 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/04 21:44:56 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void    *philosopher_routine(void* arg);
 void    init_table(t_dinner *dinner);
 void    table_allocation(t_dinner *dinner);
 void    set_up_dinner(t_dinner *dinner);
+void    fork_allocation(t_dinner *dinner, int counter);
+void    philosopher_allocation(t_dinner *dinner, int counter);
 
 #endif
