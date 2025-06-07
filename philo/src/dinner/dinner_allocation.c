@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_allocation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:29:38 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/04 21:50:32 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/07 18:53:01 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    table_allocation(t_dinner *dinner)
 void    fork_allocation(t_dinner *dinner, int counter)
 {
     dinner->array_forks[counter].id = counter;
-    dinner->array_forks[counter].status = 0;
+    dinner->array_forks[counter].status = FORK_AVAILABLE;
     dinner->array_forks[counter].owner_id = -1;
 
     init_mutex(&dinner->array_forks[counter].mutex, dinner);
