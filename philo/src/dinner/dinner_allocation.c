@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:29:38 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/07 18:53:01 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/08 17:53:26 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ void    table_allocation(t_dinner *dinner)
         free(dinner->array_philosophers);
         return ;
     }
-}
-
-void    fork_allocation(t_dinner *dinner, int counter)
-{
-    dinner->array_forks[counter].id = counter;
-    dinner->array_forks[counter].status = FORK_AVAILABLE;
-    dinner->array_forks[counter].owner_id = -1;
-
-    init_mutex(&dinner->array_forks[counter].mutex, dinner);
-    if (dinner->last_error != SUCCESS)
-        return ;
-    dinner->created_forks += 1;
 }
 
 void    philosopher_allocation(t_dinner *dinner, int counter)

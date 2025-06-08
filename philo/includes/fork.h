@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:59 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/19 21:45:33 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/08 17:50:36 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@ typedef struct s_fork
 
 # define FORK_AVAILABLE 1
 # define FORK_TAKEN 0
+
+/* Functions */
+void    hold_forks(t_philosopher *philo);
+void    lock_fork(t_fork *fork, int philo_id);
+void    release_forks(t_philosopher *philo);
+void    unlock_fork(t_fork *fork);
 
 #endif

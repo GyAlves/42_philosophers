@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:02:51 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/04 18:49:01 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/08 18:24:09 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <limits.h>
 #include <sys/time.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 /* Structs */
 typedef struct s_fork t_fork;
@@ -32,5 +33,6 @@ typedef struct s_dinner t_dinner;
 # include "utils.h"
 # include "input_parser.h"
 # include "error_handling.h"
+# include "routine.h"
 
 #endif

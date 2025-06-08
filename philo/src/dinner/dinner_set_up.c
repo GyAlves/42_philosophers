@@ -6,16 +6,11 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 21:48:55 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/04 21:54:37 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void    *philosopher_routine(void* arg)
-{
-    return (arg);
-}
 
 void    init_table(t_dinner *dinner)
 {
