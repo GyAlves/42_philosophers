@@ -29,6 +29,7 @@ typedef struct s_dinner
     long long dinner_started_ms;
 
     pthread_mutex_t logging_mutex;
+    pthread_t       death_monitor_thread;
     
     t_philosopher   *array_philosophers;
     t_fork          *array_forks;
@@ -43,6 +44,7 @@ typedef struct s_dinner
 
 /* Functions */
 void    *philosopher_routine(void* arg);
+void    *death_monitor(void *arg);
 void    init_table(t_dinner *dinner);
 void    table_allocation(t_dinner *dinner);
 void    set_up_dinner(t_dinner *dinner);
