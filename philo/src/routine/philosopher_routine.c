@@ -18,7 +18,7 @@ void    *philosopher_routine(void* arg)
 
     philo = (t_philosopher*)arg;
 
-    while(1)
+    while(!philo->dinner->dinner_ended)
     {
         philosopher_think(philo);
         philosopher_eat(philo);
@@ -41,6 +41,7 @@ void    philosopher_eat(t_philosopher *philo)
     hold_forks(philo);
     
     philo->status = PHILOSOPHER_EATING;
+    philo->last_meal_ms = get_time_in_ms();
     logging_philo_status(philo->dinner, "is now eating\n", philo->id);
     usleep(philo->dinner->time_to_eat_ms * 1000);
     
