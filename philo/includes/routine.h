@@ -15,5 +15,8 @@
 
 /* Functions */
 void    *philosopher_routine(void* arg);
+void    philosopher_think(t_philosopher *philo);
+void    philosopher_eat(t_philosopher *philo);
+void    philosopher_sleep(t_philosopher *philo);
 
 #endif
