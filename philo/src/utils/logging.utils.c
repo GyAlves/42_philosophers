@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   logging.utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:30:16 by galves-a          #+#    #+#             */
-/*   Updated: 2025/05/21 19:52:26 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:02:50 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,11 @@ int	check_and_report(const char *message)
 	printf("Error: %s\n", message);
 	print_usage();
 	return (0);
+}
+
+void	logging_philo_status(t_dinner *dinner, char *message, int philo_id)
+{
+	pthread_mutex_lock(&dinner->logging_mutex);
+	printf("Philo %d %s", philo_id, message);
+	pthread_mutex_unlock(&dinner->logging_mutex);
 }

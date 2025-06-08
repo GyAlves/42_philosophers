@@ -27,4 +27,5 @@ void        cleanup_threads(t_dinner *dinner);
 void        cleanup_dinner(t_dinner *dinner);
 long long   get_time_in_ms(void);
 long long   ft_atoll(char *string);
+void        logging_philo_status(t_dinner *dinner, char *message, int philo_id);
 #endif
