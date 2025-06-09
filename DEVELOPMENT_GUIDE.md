@@ -25,9 +25,21 @@ Each philosopher should run in an infinite loop with these states:
 - [x] **State management updates**
 - [x] **Fork status tracking and validation**
 
-### 2. Death Detection 
+### 2. Death Detection System
 
-- [ ] **Timestamp tracking for last meal**
+**Implementation Plan:**
+1. Update `last_meal_ms` when philosopher starts eating
+2. Create monitor thread that checks all philosophers periodically  
+3. Calculate `current_time - last_meal_ms > time_to_die`
+4. Set global flag to stop simulation when death detected
+5. Print death message and terminate cleanly
+
+**Key Questions:**
+1. When should you initialize `last_meal_ms`? (At simulation start)
+2. What happens if philosopher is still trying to get forks? (They can still die)
+3. How do you prevent race conditions on `dinner_ended`? (It's read-only for most threads)
+
+- [x] **Timestamp tracking for last meal**
 - [ ] **Death monitoring thread creation**
 - [ ] **Death condition checking (time_to_die)**
 - [ ] **Simulation termination on death**
@@ -46,7 +58,7 @@ Each philosopher should run in an infinite loop with these states:
 - [ ] **Time conversion utilities (ms to μs)**
 
 ### 5. Output Management
-- [ ] **Thread-safe printing with mutex**
+- [x] **Thread-safe printing with mutex**
 - [ ] **Standardized message format**
 - [ ] **Timestamp in output messages**
 - [ ] **Clean program termination output**
@@ -208,6 +220,78 @@ pthread_mutex_lock(fork->mutex);   // ❌ The mutex value itself
 - Without `&` = gives you the actual value
 
 `pthread_mutex_lock()` needs to modify the mutex, so it needs its memory address!
+
+### Thread-Safe Logging with Mutex
+
+**The Problem:**
+Multiple threads using `printf()` simultaneously create garbled output:
+```c
+// Multiple threads doing this:
+printf("Philo %d is now thinking\n", philo->id);
+printf("Philo %d is now eating\n", philo->id);
+
+// Results in garbled output:
+"Philo Philo 1 is now 2 is now thinking
+eating"
+```
+
+**How Mutex Locking Works:**
+Anything between `pthread_mutex_lock()` and `pthread_mutex_unlock()` is **protected** - only one thread can execute that code section at a time.
+
+```c
+pthread_mutex_lock(&dinner->logging_mutex);    // ← START: Block here if another thread is using
+printf("Philo %d %s\n", philo_id, message);    // ← ONLY ONE THREAD can be here at a time
+pthread_mutex_unlock(&dinner->logging_mutex);  // ← END: Release so next thread can enter
+```
+
+**Timeline Example:**
+```
+Thread 1: [LOCK] → printf("Philo 1 thinking") → [UNLOCK]
+Thread 2: [WAITING...........................] → [LOCK] → printf("Philo 2 eating") → [UNLOCK]  
+Thread 3: [WAITING...........................] → [WAITING..] → [LOCK] → printf("Philo 3 sleeping") → [UNLOCK]
+```
+
+**Without mutex (current problem):**
+```
+Thread 1: printf("Philo 1 thinking")    ← Starts printing
+Thread 2: printf("Philo 2 eating")      ← Interrupts Thread 1  
+Thread 1: (continues)                   ← Finishes after Thread 2
+
+Output: "Philo Philo 1 thinking2 eating"  ← GARBLED!
+```
+
+**With mutex (safe_log):**
+```
+Thread 1: [LOCK] → printf("Philo 1 thinking") → [UNLOCK]
+Thread 2: [WAITING] → [LOCK] → printf("Philo 2 eating") → [UNLOCK]
+
+Output: 
+"Philo 1 thinking"
+"Philo 2 eating"    ← CLEAN!
+```
+
+**Solution Implementation:**
+```c
+// 1. Add logging mutex to dinner struct:
+typedef struct s_dinner {
+    // ... existing fields
+    pthread_mutex_t logging_mutex;
+} t_dinner;
+
+// 2. Create safe logging function:
+void    safe_log(t_dinner *dinner, char *message, int philo_id)
+{
+    pthread_mutex_lock(&dinner->logging_mutex);
+    printf("Philo %d %s\n", philo_id, message);
+    pthread_mutex_unlock(&dinner->logging_mutex);
+}
+
+// 3. Replace all printf calls:
+// Instead of: printf("Philo %d is now thinking\n", philo->id);
+// Use: safe_log(philo->dinner, "is now thinking", philo->id);
+```
+
+**Think of it like a bathroom door** - only one person can be inside at a time, others wait in line!
 
 ---
 

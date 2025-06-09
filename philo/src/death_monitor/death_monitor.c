@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/08 19:15:00 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/08 22:58:49 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,26 @@
 
 void    *death_monitor(void *arg)
 {
+    int         philo_counter;
     t_dinner    *dinner;
-    int         i;
-    long long   current_time;
-    long long   time_since_last_meal;
 
     dinner = (t_dinner*)arg;
+
     while (!dinner->dinner_ended)
     {
-        i = 0;
-        while (i < dinner->number_of_philosophers)
+        philo_counter = 0;
+        while (philo_counter <= dinner->number_of_philosophers)
         {
-            current_time = get_time_in_ms();
-            time_since_last_meal = current_time - dinner->array_philosophers[i].last_meal_ms;
             
-            if (time_since_last_meal > dinner->time_to_die_ms)
-            {
-                dinner->dinner_ended = 1;
-                logging_philo_status(dinner, "died\n", dinner->array_philosophers[i].id);
-                return (NULL);
-            }
-            i++;
+            philo_counter++;
         }
-        usleep(1000); // Check every 1ms for accuracy
+        /*
+            - Loop over the array of philosophers
+                - Verify the last time the philo ate 
+                - Verify if anyone has exceeded time to die
+                    - Set the flag dinner_ended to true and leave the cycle ? 
+        */
     }
-    return (NULL);
+
+    return (dinner);
 }
