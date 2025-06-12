@@ -40,10 +40,10 @@ Each philosopher should run in an infinite loop with these states:
 3. How do you prevent race conditions on `dinner_ended`? (It's read-only for most threads)
 
 - [x] **Timestamp tracking for last meal**
-- [ ] **Death monitoring thread creation**
-- [ ] **Death condition checking (time_to_die)**
-- [ ] **Simulation termination on death**
-- [ ] **Death message formatting**
+- [x] **Death monitoring thread creation**
+- [x] **Death condition checking (time_to_die)**
+- [x] **Simulation termination on death**
+- [x] **Death message formatting**
 
 ### 3. Meal Counting System
 - [ ] **Track number_of_meals per philosopher**
@@ -292,6 +292,56 @@ void    safe_log(t_dinner *dinner, char *message, int philo_id)
 ```
 
 **Think of it like a bathroom door** - only one person can be inside at a time, others wait in line!
+
+### Atomic Access and Race Conditions
+
+**What is Atomic Access?**
+Atomic access means an operation that completes fully without interruption from other threads. It's "all-or-nothing" - either the entire operation happens, or none of it does.
+
+**The Problem: Race Conditions**
+When multiple threads access the same variable simultaneously without protection:
+
+```c
+// Thread 1 (philosopher):        // Thread 2 (monitor):
+if (!philo->is_dead) {           if (philo->is_dead) {
+    // philosopher continues           dinner->dinner_ended = 1;
+    philo->is_dead = 1; // ← Sets death
+}
+```
+
+**Timeline without mutex:**
+```
+Time 1: Monitor reads is_dead = 0  ← Thinks philosopher is alive
+Time 2: Philosopher sets is_dead = 1  ← Dies
+Time 3: Monitor continues with old value ← Missed the death!
+```
+
+**Solution: Mutex for Atomic Access**
+```c
+// In philosopher thread:
+pthread_mutex_lock(&philo->death_mutex);
+if (is_philosopher_dead(philo)) {
+    philo->is_dead = 1;
+    pthread_mutex_unlock(&philo->death_mutex);
+    return; // exit thread
+}
+pthread_mutex_unlock(&philo->death_mutex);
+
+// In monitor thread:
+pthread_mutex_lock(&philo->death_mutex);
+if (philo->is_dead) {
+    dinner->dinner_ended = 1;
+}
+pthread_mutex_unlock(&philo->death_mutex);
+```
+
+**Why This Works:**
+- Only one thread can access `is_dead` at a time
+- Read and write operations are now atomic
+- No inconsistent intermediate states
+- Guaranteed consistent data
+
+**Key Rule:** Any shared variable accessed by multiple threads needs mutex protection for atomic access.
 
 ---
 
