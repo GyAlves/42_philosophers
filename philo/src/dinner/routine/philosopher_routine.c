@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:54:53 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/08 19:47:32 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/11 22:14:03 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,20 @@ void    *philosopher_routine(void* arg)
 
 void    philosopher_think(t_philosopher *philo)
 {
+    if (philo_vitals(philo))
+        return ;
     if (philo->status != PHILOSOPHER_THINKING)
         philo->status = PHILOSOPHER_THINKING;
-        
     logging_philo_status(philo->dinner, "is now thinking\n", philo->id);
     usleep(30000);
 }
 
 void    philosopher_eat(t_philosopher *philo)
 {
+
+    if (philo_vitals(philo))
+        return ;
     hold_forks(philo);
-    
     philo->status = PHILOSOPHER_EATING;
     philo->last_meal_ms = get_time_in_ms();
     logging_philo_status(philo->dinner, "is now eating\n", philo->id);
@@ -50,6 +53,8 @@ void    philosopher_eat(t_philosopher *philo)
 
 void    philosopher_sleep(t_philosopher *philo)
 {
+    if (philo_vitals(philo))
+        return ;
     philo->status = PHILOSOPHER_SLEEPING;
     logging_philo_status(philo->dinner, "is now sleeping\n", philo->id);
     usleep(philo->dinner->time_to_sleep_ms * 1000);

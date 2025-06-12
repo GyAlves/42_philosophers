@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 17:30:16 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/08 19:02:50 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/11 21:50:31 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,12 @@ void	logging_philo_status(t_dinner *dinner, char *message, int philo_id)
 {
 	pthread_mutex_lock(&dinner->logging_mutex);
 	printf("Philo %d %s", philo_id, message);
+	pthread_mutex_unlock(&dinner->logging_mutex);
+}
+
+void	logging_philo_death_status(t_dinner *dinner,  int philo_id, long long time_of_death)
+{
+	pthread_mutex_lock(&dinner->logging_mutex);
+	printf("%lld %d died", time_of_death, philo_id);
 	pthread_mutex_unlock(&dinner->logging_mutex);
 }

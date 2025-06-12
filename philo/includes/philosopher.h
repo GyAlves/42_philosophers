@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:26 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/09 09:26:50 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/11 20:41:56 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ typedef struct s_philosopher
 {
     int id;
     int status;
-    pthread_t thread_id;
+    int is_dead;
     long long last_meal_ms;
     int number_of_meals;
+
+    pthread_t thread_id;
+    pthread_mutex_t death_mutex;
+
     struct s_fork *left_fork;
     struct s_fork *right_fork;
     struct s_dinner *dinner;
@@ -30,5 +34,10 @@ typedef struct s_philosopher
 # define PHILOSOPHER_EATING 1
 # define PHILOSOPHER_THINKING 2
 # define PHILOSOPHER_SLEEPING 3
+
+int is_philosopher_dead(t_philosopher *philo);
+int read_death_mutex(t_philosopher *philo);
+void write_death_mutex(t_philosopher *philo, int death_mutex_value);
+int philo_vitals(t_philosopher *philo);
 
 #endif

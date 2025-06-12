@@ -6,7 +6,7 @@
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:29:38 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/08 17:53:26 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/11 22:15:06 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void    philosopher_allocation(t_dinner *dinner, int counter)
     dinner->array_philosophers[counter].left_fork = &dinner->array_forks[counter];
     dinner->array_philosophers[counter].right_fork = &dinner->array_forks[(counter + 1) % dinner->number_of_philosophers];
     dinner->array_philosophers[counter].dinner = dinner;
+    init_mutex(&dinner->array_philosophers[counter].death_mutex, dinner);
     
     if (pthread_create(&dinner->array_philosophers[counter].thread_id, NULL, philosopher_routine, &dinner->array_philosophers[counter]) != 0)
     {
