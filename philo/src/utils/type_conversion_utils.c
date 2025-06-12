@@ -35,11 +35,11 @@ int	ft_atoi(char *string)
 	return (result * sign);
 }
 
-long long   ft_atoll(char *string)
+long long	ft_atoll(char *string)
 {
-	long long   result;
-	int	sign;
-	int	counter;
+	long long	result;
+	int			sign;
+	int			counter;
 
 	result = 0;
 	counter = 0;

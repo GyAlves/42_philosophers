@@ -17,20 +17,16 @@ int	input_parser(int argc, char **argv, t_dinner *dinner)
 {
 	if (!are_parameters_valid(argc, argv))
 		return (0);
-
 	dinner->number_of_philosophers = ft_atoi(argv[1]);
 	dinner->time_to_die_ms = ft_atoll(argv[2]);
 	dinner->time_to_eat_ms = ft_atoll(argv[3]);
 	dinner->time_to_sleep_ms = ft_atoll(argv[4]);
-
 	dinner->dinner_ended = 0;
 	dinner->dinner_started_ms = 0;
-
 	if (argc == 6)
 		dinner->number_of_meals = ft_atoi(argv[5]);
 	else
 		dinner->number_of_meals = -1;
-	
 	return (1);
 }
 

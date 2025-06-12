@@ -12,12 +12,12 @@
 
 #include "philo.h"
 
-long long   get_time_in_ms(void)
+long long	get_time_in_ms(void)
 {
-    struct timeval timestamp;
-    long long    time_in_ms;
-    
-    gettimeofday(&timestamp, NULL);
-    time_in_ms = (timestamp.tv_sec * 1000) + (timestamp.tv_usec / 1000);
-    return (time_in_ms);
+	struct timeval	timestamp;
+	long long		time_in_ms;
+
+	gettimeofday(&timestamp, NULL);
+	time_in_ms = (timestamp.tv_sec * 1000) + (timestamp.tv_usec / 1000);
+	return (time_in_ms);
 }

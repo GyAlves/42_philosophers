@@ -12,19 +12,19 @@
 
 #include "philo.h"
 
-void    mutex_init_error(int mutexes_count, t_fork *forks)
+void	mutex_init_error(int mutexes_count, t_fork *forks)
 {
-    int counter;
+	int	counter;
 
-    counter = 0;
-    while (counter < mutexes_count)
-    {
-        if (pthread_mutex_destroy(&forks[counter].mutex) != 0)
-        {
-            printf("Error destroying fork mutex");
-            return ;
-        }
-        counter++;
-    }
-    return ;
+	counter = 0;
+	while (counter < mutexes_count)
+	{
+		if (pthread_mutex_destroy(&forks[counter].mutex) != 0)
+		{
+			printf("Error destroying fork mutex");
+			return ;
+		}
+		counter++;
+	}
+	return ;
 }

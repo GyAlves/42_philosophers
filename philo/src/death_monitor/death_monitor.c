@@ -12,23 +12,22 @@
 
 #include "philo.h"
 
-void    *death_monitor(void *arg)
+void	*death_monitor(void *arg)
 {
-    t_dinner    *dinner;
+	t_dinner	*dinner;
 
-    dinner = (t_dinner*)arg;
-
-    while (!dinner->dinner_ended)
-    {
-        if (all_philosophers_satisfied(dinner))
-        {
-            dinner->dinner_ended = 1;
-            pthread_mutex_lock(&dinner->logging_mutex);
-            printf("All philosophers have eaten enough times\n");
-            pthread_mutex_unlock(&dinner->logging_mutex);
-            break;
-        }
-        usleep(100);
-    }
-    return (dinner);
+	dinner = (t_dinner *)arg;
+	while (!dinner->dinner_ended)
+	{
+		if (all_philosophers_satisfied(dinner))
+		{
+			dinner->dinner_ended = 1;
+			pthread_mutex_lock(&dinner->logging_mutex);
+			printf("All philosophers have eaten enough times\n");
+			pthread_mutex_unlock(&dinner->logging_mutex);
+			break;
+		}
+		usleep(100);
+	}
+	return (dinner);
 }

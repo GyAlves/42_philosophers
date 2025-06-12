@@ -12,11 +12,11 @@
 
 #include "philo.h"
 
-void    init_mutex(pthread_mutex_t *mutex, t_dinner *dinner)
+void	init_mutex(pthread_mutex_t *mutex, t_dinner *dinner)
 {
-    if (pthread_mutex_init(mutex, NULL) != 0)
-    {
-        dinner->last_error = ERROR_MUTEX_INIT_FORK;
-        return ;
-    }
+	if (pthread_mutex_init(mutex, NULL) != 0)
+	{
+		dinner->last_error = ERROR_MUTEX_INIT_FORK;
+		return ;
+	}
 }

@@ -16,7 +16,6 @@ void	print_usage(void)
 {
 	printf("\nUsage: ./philo <philosophers> <time_to_die> <time_to_eat> ");
 	printf("<time_to_sleep> [times_to_eat]\n\n");
-	
 	printf("-----------------------------------------------------------\n");
 	printf("ARGUMENTS:\n");
 	printf("-----------------------------------------------------------\n");
@@ -30,7 +29,6 @@ void	print_usage(void)
 	printf("  times_to_eat      (Optional) Number of times each philosopher");
 	printf(" must eat before\n");
 	printf("                    the simulation stops\n\n");
-	
 	printf("-----------------------------------------------------------\n");
 	printf("EXAMPLES:\n");
 	printf("-----------------------------------------------------------\n");
@@ -50,13 +48,16 @@ int	check_and_report(const char *message)
 
 void	logging_philo_status(t_dinner *dinner, char *message, int philo_id)
 {
-	long long timestamp = get_time_in_ms() - dinner->dinner_started_ms;
+	long long	timestamp;
+
+	timestamp = get_time_in_ms() - dinner->dinner_started_ms;
 	pthread_mutex_lock(&dinner->logging_mutex);
 	printf("%lld %d %s", timestamp, philo_id, message);
 	pthread_mutex_unlock(&dinner->logging_mutex);
 }
 
-void	logging_philo_death_status(t_dinner *dinner,  int philo_id, long long time_of_death)
+void	logging_philo_death_status(t_dinner *dinner, int philo_id,
+		long long time_of_death)
 {
 	pthread_mutex_lock(&dinner->logging_mutex);
 	printf("%lld %d died\n", time_of_death, philo_id);
