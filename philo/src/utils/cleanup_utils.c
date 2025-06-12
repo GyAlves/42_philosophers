@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:48:17 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 18:49:28 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/12 19:50:53 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void    cleanup_dinner(t_dinner *dinner)
     cleanup_threads(dinner);
     if (dinner->created_forks > 0)
         mutex_init_error(dinner->created_forks, dinner->array_forks);
+        
+    pthread_mutex_destroy(&dinner->logging_mutex);
+        
     if(dinner->array_philosophers)
     {
         free(dinner->array_philosophers);

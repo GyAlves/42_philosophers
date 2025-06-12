@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:26 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/11 20:41:56 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/12 19:15:30 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int is_philosopher_dead(t_philosopher *philo);
 int read_death_mutex(t_philosopher *philo);
 void write_death_mutex(t_philosopher *philo, int death_mutex_value);
 int philo_vitals(t_philosopher *philo);
+int all_philosophers_satisfied(t_dinner *dinner);
 
 #endif

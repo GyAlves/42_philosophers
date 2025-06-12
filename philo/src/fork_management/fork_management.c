@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:48:52 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/08 18:11:28 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/12 19:15:30 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 void    hold_forks(t_philosopher *philo)
 {
+    if (philo->dinner->dinner_ended || read_death_mutex(philo))
+        return;
+        
     if (philo->id % 2 == 0) {
         lock_fork(philo->left_fork, philo->id);
+        if (philo->dinner->dinner_ended || read_death_mutex(philo)) {
+            unlock_fork(philo->left_fork);
+            return;
+        }
         lock_fork(philo->right_fork, philo->id);
     } else {
         lock_fork(philo->right_fork, philo->id);
+        if (philo->dinner->dinner_ended || read_death_mutex(philo)) {
+            unlock_fork(philo->right_fork);
+            return;
+        }
         lock_fork(philo->left_fork, philo->id);
     }
 }

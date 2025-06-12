@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death_monitor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/11 22:10:29 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/12 19:26:10 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void    *death_monitor(void *arg)
 {
-    int         philo_counter;
     t_dinner    *dinner;
 
     dinner = (t_dinner*)arg;
 
     while (!dinner->dinner_ended)
     {
-        philo_counter = 0;
-        while (philo_counter < dinner->number_of_philosophers)
+        if (all_philosophers_satisfied(dinner))
         {
-            if (read_death_mutex(&dinner->array_philosophers[philo_counter]))
-            {
-                dinner->dinner_ended = 1;
-                break;
-            }
-            philo_counter++;
+            dinner->dinner_ended = 1;
+            pthread_mutex_lock(&dinner->logging_mutex);
+            printf("All philosophers have eaten enough times\n");
+            pthread_mutex_unlock(&dinner->logging_mutex);
+            break;
         }
+        usleep(100);
     }
     return (dinner);
 }

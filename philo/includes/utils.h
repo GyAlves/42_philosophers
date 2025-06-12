@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:30:05 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 18:46:06 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/12 19:15:30 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void        cleanup_threads(t_dinner *dinner);
 void        cleanup_dinner(t_dinner *dinner);
 long long   get_time_in_ms(void);
 long long   ft_atoll(char *string);
-void        logging_philo_status(t_dinner *dinner, char *message, int philo_id);
+void	    logging_philo_status(t_dinner *dinner, char *message, int philo_id);
+void	    logging_philo_death_status(t_dinner *dinner,  int philo_id, long long time_of_death);
 #endif

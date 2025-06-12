@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:44:38 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/04 01:32:03 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/06/12 19:45:23 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ void    mutex_init_error(int mutexes_count, t_fork *forks)
         }
         counter++;
     }
-    free(forks);
     return ;
 }
