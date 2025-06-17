@@ -28,7 +28,7 @@ typedef struct s_fork
 # define FORK_TAKEN 0
 
 /* Functions */
-void    hold_forks(t_philosopher *philo);
+int     hold_forks(t_philosopher *philo);
 void    lock_fork(t_fork *fork, int philo_id);
 void    release_forks(t_philosopher *philo);
 void    unlock_fork(t_fork *fork);

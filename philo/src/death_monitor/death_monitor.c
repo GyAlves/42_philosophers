@@ -15,10 +15,30 @@
 void	*death_monitor(void *arg)
 {
 	t_dinner	*dinner;
+	int			i;
 
 	dinner = (t_dinner *)arg;
 	while (!dinner->dinner_ended)
 	{
+		i = 0;
+		while (i < dinner->number_of_philosophers)
+		{
+			if (is_philosopher_dead(&dinner->array_philosophers[i]))
+			{
+				pthread_mutex_lock(&dinner->array_philosophers[i].death_mutex);
+				if (!dinner->array_philosophers[i].is_dead && !dinner->dinner_ended)
+				{
+					dinner->array_philosophers[i].is_dead = 1;
+					dinner->dinner_ended = 1;
+					pthread_mutex_unlock(&dinner->array_philosophers[i].death_mutex);
+					logging_philo_death_status(dinner, dinner->array_philosophers[i].id,
+						get_time_in_ms() - dinner->dinner_started_ms);
+					return (dinner);
+				}
+				pthread_mutex_unlock(&dinner->array_philosophers[i].death_mutex);
+			}
+			i++;
+		}
 		if (all_philosophers_satisfied(dinner))
 		{
 			dinner->dinner_ended = 1;
@@ -27,7 +47,7 @@ void	*death_monitor(void *arg)
 			pthread_mutex_unlock(&dinner->logging_mutex);
 			break;
 		}
-		usleep(100);
+		usleep(1000);
 	}
 	return (dinner);
 }

@@ -12,17 +12,21 @@
 
 #include "philo.h"
 
-void	hold_forks(t_philosopher *philo)
+int	hold_forks(t_philosopher *philo)
 {
 	if (philo->dinner->dinner_ended || read_death_mutex(philo))
-		return ;
+		return (0);
+	if (philo->dinner->number_of_philosophers == 1)
+	{
+		return (0);
+	}
 	if (philo->id % 2 == 0)
 	{
 		lock_fork(philo->left_fork, philo->id);
 		if (philo->dinner->dinner_ended || read_death_mutex(philo))
 		{
 			unlock_fork(philo->left_fork);
-			return ;
+			return (0);
 		}
 		lock_fork(philo->right_fork, philo->id);
 	}
@@ -32,10 +36,11 @@ void	hold_forks(t_philosopher *philo)
 		if (philo->dinner->dinner_ended || read_death_mutex(philo))
 		{
 			unlock_fork(philo->right_fork);
-			return ;
+			return (0);
 		}
 		lock_fork(philo->left_fork, philo->id);
 	}
+	return (1);
 }
 
 void	lock_fork(t_fork *fork, int philo_id)
@@ -58,6 +63,10 @@ void	fork_allocation(t_dinner *dinner, int counter)
 
 void	release_forks(t_philosopher *philo)
 {
+	if (philo->dinner->number_of_philosophers == 1)
+	{
+		return ;
+	}
 	unlock_fork(philo->right_fork);
 	unlock_fork(philo->left_fork);
 }
