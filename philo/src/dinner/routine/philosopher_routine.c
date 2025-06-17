@@ -36,7 +36,6 @@ int	philosopher_think(t_philosopher *philo)
 	if (philo->status != PHILOSOPHER_THINKING)
 		philo->status = PHILOSOPHER_THINKING;
 	logging_philo_status(philo->dinner, "is thinking\n", philo->id);
-	usleep(1000);
 	return (1);
 }
 
@@ -57,9 +56,9 @@ int	philosopher_eat(t_philosopher *philo)
 		return (0);
 	}
 	philo->status = PHILOSOPHER_EATING;
-	philo->last_meal_ms = get_time_in_ms();
 	logging_philo_status(philo->dinner, "is eating\n", philo->id);
 	usleep(philo->dinner->time_to_eat_ms * 1000);
+	philo->last_meal_ms = get_time_in_ms();
 	philo->number_of_meals++;
 	release_forks(philo);
 	return (1);

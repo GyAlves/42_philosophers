@@ -47,7 +47,7 @@ void	*death_monitor(void *arg)
 			pthread_mutex_unlock(&dinner->logging_mutex);
 			break;
 		}
-		usleep(1000);
+		usleep(dinner->time_to_die_ms < 1000 ? 500 : 1000);
 	}
 	return (dinner);
 }
