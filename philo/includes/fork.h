@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:59 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 17:50:50 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:29:30 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FORK_H
 
 # include <pthread.h>
+
+struct s_philosopher;
 
 typedef struct s_fork
 {
@@ -27,9 +29,9 @@ typedef struct s_fork
 # define FORK_TAKEN 0
 
 /* Functions */
-int		hold_forks(t_philosopher *philo);
+int		hold_forks(struct s_philosopher *philo);
 void	lock_fork(t_fork *fork, int philo_id);
-void	release_forks(t_philosopher *philo);
+void	release_forks( struct s_philosopher *philo);
 void	unlock_fork(t_fork *fork);
 
 #endif
