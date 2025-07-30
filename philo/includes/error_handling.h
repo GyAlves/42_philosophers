@@ -6,14 +6,15 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:43:09 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 17:56:49 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:29:25 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_HANDLING_H
 # define ERROR_HANDLING_H
 
-# include "fork.h"
+
+struct s_fork;
 
 typedef enum error_status_code
 {
@@ -27,6 +28,6 @@ typedef enum error_status_code
 }	t_error_status_code;
 
 /* Functions */
-void	mutex_init_error(int mutexes_count, t_fork *forks);
+void	mutex_init_error(int mutexes_count, struct s_fork *forks);
 
 #endif

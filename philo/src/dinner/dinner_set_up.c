@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/07/30 17:24:12 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:11:50 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,45 @@ void	table_allocation(t_dinner *dinner)
 
 void	philosopher_allocation(t_dinner *dinner, int counter)
 {
-	dinner->array_philosophers[counter].id = counter;
-	dinner->array_philosophers[counter].status = PHILOSOPHER_THINKING;
-	dinner->array_philosophers[counter].last_meal_ms
-		= dinner->dinner_started_ms;
-	dinner->array_philosophers[counter].number_of_meals = 0;
-	dinner->array_philosophers[counter].is_dead = 0;
-	dinner->array_philosophers[counter].left_fork
-		= &dinner->array_forks[counter];
-	dinner->array_philosophers[counter].right_fork
-		= &dinner->array_forks[(counter + 1) % dinner->number_of_philosophers];
-	dinner->array_philosophers[counter].dinner = dinner;
-	init_mutex(&dinner->array_philosophers[counter].death_mutex, dinner);
-	if (pthread_create(&dinner->array_philosophers[counter].thread_id, NULL,
-			philosopher_routine, &dinner->array_philosophers[counter]) != 0)
+	t_philosopher	*philo;
+
+	philo = &dinner->array_philosophers[counter];
+	philo_init(dinner, counter);
+	init_mutex(&philo->death_mutex, dinner);
+	if (pthread_create(&philo->thread_id, NULL,
+			philosopher_routine,
+			philo) != 0)
 	{
 		dinner->last_error = ERROR_THREAD_CREATE;
 		return ;
 	}
-	if (dinner->time_to_die_ms <= (dinner->time_to_eat_ms + dinner->time_to_sleep_ms + 20))
+	if (dinner->time_to_die_ms <= (dinner->time_to_eat_ms
+			+ dinner->time_to_sleep_ms + 20))
 		usleep(counter * 200);
 	else if (dinner->time_to_die_ms < 500)
 		usleep(counter * 50);
 	else if (counter % 2 == 1 && dinner->time_to_die_ms < 1000)
 		usleep(100);
 	dinner->created_threads += 1;
+}
+
+void	philo_init(t_dinner *dinner, int counter)
+{
+	t_philosopher	*philo;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
+	int				philos_count;
+
+	philos_count = dinner->number_of_philosophers;
+	left_fork = &dinner->array_forks[counter];
+	right_fork = &dinner->array_forks[(counter + 1) % philos_count];
+	philo = &dinner->array_philosophers[counter];
+	philo->id = counter;
+	philo->status = PHILOSOPHER_THINKING;
+	philo->last_meal_ms = dinner->dinner_started_ms;
+	philo->number_of_meals = 0;
+	philo->is_dead = 0;
+	philo->left_fork = left_fork;
+	philo->right_fork = right_fork;
+	philo->dinner = dinner;
 }

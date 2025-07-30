@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:54:53 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 18:07:15 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:49:20 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 void	*philosopher_routine(void *arg)
 {
 	t_philosopher	*philo;
+	int				philos_count;
 
 	philo = (t_philosopher *)arg;
+	philos_count = philo->dinner->number_of_philosophers;
 	while (!philo->dinner->dinner_ended && !read_death_mutex(philo))
 	{
 		if (!philosopher_think(philo))
 			break ;
-		if (!philosopher_eat(philo) && philo->dinner->number_of_philosophers > 1)
+		if (!philosopher_eat(philo) && philos_count > 1)
 			break ;
 		if (!philosopher_sleep(philo))
 			break ;
@@ -56,18 +58,13 @@ int	philosopher_eat(t_philosopher *philo)
 		return (0);
 	}
 	philo->status = PHILOSOPHER_EATING;
-	logging_philo_status(
-		philo->dinner,
-		"is eating\n",
-		philo->id
-	);
+	logging_philo_status(philo->dinner, "is eating\n", philo->id);
 	usleep(philo->dinner->time_to_eat_ms * 1000);
 	philo->last_meal_ms = get_time_in_ms();
 	philo->number_of_meals++;
 	release_forks(philo);
 	return (1);
 }
-
 
 int	philosopher_sleep(t_philosopher *philo)
 {

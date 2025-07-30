@@ -6,16 +6,17 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 17:54:30 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:10:20 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DINNER_H
 # define DINNER_H
 
-# include "philosopher.h"
+struct s_philosopher;
+struct s_fork;
+
 # include "error_handling.h"
-# include "fork.h"
 
 typedef struct s_dinner
 {
@@ -28,22 +29,20 @@ typedef struct s_dinner
 	long long			dinner_started_ms;
 	pthread_mutex_t		logging_mutex;
 	pthread_t			death_monitor_thread;
-	t_philosopher		*array_philosophers;
-	t_fork				*array_forks;
-	t_error_status_code	last_error;
-	int					initialization_complete;
-	int					initialized_mutexes;
-	int					created_forks;
-	int					created_threads;
+	struct s_philosopher	*array_philosophers;
+	struct s_fork			*array_forks;
+	t_error_status_code		last_error;
+	int						initialization_complete;
+	int						initialized_mutexes;
+	int						created_forks;
+	int						created_threads;
 }	t_dinner;
 
 /* Functions */
-void	*philosopher_routine(void *arg);
 void	*death_monitor(void *arg);
 void	init_table(t_dinner *dinner);
 void	table_allocation(t_dinner *dinner);
 void	set_up_dinner(t_dinner *dinner);
 void	fork_allocation(t_dinner *dinner, int counter);
-void	philosopher_allocation(t_dinner *dinner, int counter);
 
 #endif

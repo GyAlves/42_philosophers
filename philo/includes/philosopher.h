@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:26 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 18:01:03 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:25:50 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHER_H
 
 # include <pthread.h>
+# include "dinner.h"
 
 typedef struct s_philosopher
 {

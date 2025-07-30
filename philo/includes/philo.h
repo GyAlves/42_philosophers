@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:02:51 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 17:51:56 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 19:10:22 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,10 @@
 typedef struct s_fork			t_fork;
 typedef struct s_philosopher	t_philosopher;
 typedef struct s_dinner			t_dinner;
+
+/* Functions */
+void	philo_init(t_dinner *dinner, int counter);
+void	philosopher_allocation(t_dinner *dinner, int counter);
+void	*philosopher_routine(void *arg);
 
 #endif
