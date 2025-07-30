@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:59 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 20:33:49 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:56:23 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define FORK_H
 
 # include <pthread.h>
-#include "philosopher.h"
+# include "philosopher.h"
 
-struct s_philosopher;
+struct	s_philosopher;
 
 typedef struct s_fork
 {

@@ -6,27 +6,27 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 19:10:20 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:59:22 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DINNER_H
 # define DINNER_H
 
-struct s_philosopher;
-struct s_fork;
-
 # include "error_handling.h"
+
+struct	s_philosopher;
+struct	s_fork;
 
 typedef struct s_dinner
 {
-	int					number_of_philosophers;
-	int					number_of_meals;
-	int					dinner_ended;
-	long long			time_to_die_ms;
-	long long			time_to_eat_ms;
-	long long			time_to_sleep_ms;
-	long long			dinner_started_ms;
+	int						number_of_philosophers;
+	int						number_of_meals;
+	int						dinner_ended;
+	long long				time_to_die_ms;
+	long long				time_to_eat_ms;
+	long long				time_to_sleep_ms;
+	long long				dinner_started_ms;
 	pthread_mutex_t		logging_mutex;
 	pthread_t			death_monitor_thread;
 	struct s_philosopher	*array_philosophers;
@@ -36,7 +36,7 @@ typedef struct s_dinner
 	int						initialized_mutexes;
 	int						created_forks;
 	int						created_threads;
-}	t_dinner;
+} t_dinner;
 
 /* Functions */
 void	*death_monitor(void *arg);
@@ -45,4 +45,4 @@ void	table_allocation(t_dinner *dinner);
 void	set_up_dinner(t_dinner *dinner);
 void	fork_allocation(t_dinner *dinner, int counter);
 
-#endif
+/* No duplicate struct definition needed here */

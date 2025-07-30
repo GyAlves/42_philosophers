@@ -6,15 +6,14 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:43:09 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 18:29:25 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:58:35 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_HANDLING_H
 # define ERROR_HANDLING_H
 
-
-struct s_fork;
+struct	s_fork;
 
 typedef enum error_status_code
 {

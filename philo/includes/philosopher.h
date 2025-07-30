@@ -6,11 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:03:26 by galves-a          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/30 18:25:50 by galves-a         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/30 20:28:56 by galves-a         ###   ########.fr       */
->>>>>>> norminette
+/*   Updated: 2025/07/30 20:36:29 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +42,8 @@ int		read_death_mutex(t_philosopher *philo);
 void	write_death_mutex(t_philosopher *philo, int death_mutex_value);
 int		philo_vitals(t_philosopher *philo);
 int		all_philosophers_satisfied(struct s_dinner *dinner);
+void	philo_init(t_dinner *dinner, int counter);
+void	philosopher_allocation(t_dinner *dinner, int counter);
+void	*philosopher_routine(void *arg);
 
 #endif
