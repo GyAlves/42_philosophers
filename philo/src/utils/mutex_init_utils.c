@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_init_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
+/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:19:16 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/04 01:12:22 by gyasminalve      ###   ########.fr       */
+/*   Updated: 2025/07/30 17:24:15 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
