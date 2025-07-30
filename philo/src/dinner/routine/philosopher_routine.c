@@ -21,7 +21,7 @@ void	*philosopher_routine(void *arg)
 	{
 		if (!philosopher_think(philo))
 			break ;
-		if (!philosopher_eat(philo))
+		if (!philosopher_eat(philo) && philo->dinner->number_of_philosophers > 1)
 			break ;
 		if (!philosopher_sleep(philo))
 			break ;
@@ -36,7 +36,6 @@ int	philosopher_think(t_philosopher *philo)
 	if (philo->status != PHILOSOPHER_THINKING)
 		philo->status = PHILOSOPHER_THINKING;
 	logging_philo_status(philo->dinner, "is thinking\n", philo->id);
-	usleep(30000);
 	return (1);
 }
 
@@ -44,16 +43,22 @@ int	philosopher_eat(t_philosopher *philo)
 {
 	if (!philo_vitals(philo))
 		return (0);
-	hold_forks(philo);
+	if (!hold_forks(philo))
+		return (0);
 	if (philo->dinner->dinner_ended || read_death_mutex(philo))
 	{
 		release_forks(philo);
 		return (0);
 	}
+	if (!philo_vitals(philo))
+	{
+		release_forks(philo);
+		return (0);
+	}
 	philo->status = PHILOSOPHER_EATING;
-	philo->last_meal_ms = get_time_in_ms();
 	logging_philo_status(philo->dinner, "is eating\n", philo->id);
 	usleep(philo->dinner->time_to_eat_ms * 1000);
+	philo->last_meal_ms = get_time_in_ms();
 	philo->number_of_meals++;
 	release_forks(philo);
 	return (1);

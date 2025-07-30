@@ -89,5 +89,11 @@ void	philosopher_allocation(t_dinner *dinner, int counter)
 		dinner->last_error = ERROR_THREAD_CREATE;
 		return ;
 	}
+	if (dinner->time_to_die_ms <= (dinner->time_to_eat_ms + dinner->time_to_sleep_ms + 20))
+		usleep(counter * 200);
+	else if (dinner->time_to_die_ms < 500)
+		usleep(counter * 50);
+	else if (counter % 2 == 1 && dinner->time_to_die_ms < 1000)
+		usleep(100);
 	dinner->created_threads += 1;
 }
