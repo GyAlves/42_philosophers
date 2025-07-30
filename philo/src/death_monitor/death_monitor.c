@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/07/30 20:23:27 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 20:32:17 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,30 @@
 
 void	*death_monitor(void *arg)
 {
-	t_dinner		*dinner;
-	t_philosopher	*philo;
-	int				counter;
+	t_dinner	*dinner;
+	int			i;
 
 	dinner = (t_dinner *)arg;
 	while (!dinner->dinner_ended)
 	{
-		counter = 0;
-		while (counter < dinner->number_of_philosophers)
+		i = 0;
+		while (i < dinner->number_of_philosophers)
 		{
-			if (is_philosopher_dead(philo))
+			if (is_philosopher_dead(&dinner->array_philosophers[i]))
 			{
-				pthread_mutex_lock(philo.death_mutex);
-				if (!philo.is_dead && !dinner->dinner_ended)
+				pthread_mutex_lock(&dinner->array_philosophers[i].death_mutex);
+				if (!dinner->array_philosophers[i].is_dead && !dinner->dinner_ended)
 				{
-					philo.is_dead = 1;
+					dinner->array_philosophers[i].is_dead = 1;
 					dinner->dinner_ended = 1;
-					pthread_mutex_unlock(philo.death_mutex);
-					logging_philo_death_status(dinner, philo.id,
+					pthread_mutex_unlock(&dinner->array_philosophers[i].death_mutex);
+					logging_philo_death_status(dinner, dinner->array_philosophers[i].id,
 						get_time_in_ms() - dinner->dinner_started_ms);
 					return (dinner);
 				}
-				pthread_mutex_unlock(philo.death_mutex);
+				pthread_mutex_unlock(&dinner->array_philosophers[i].death_mutex);
 			}
-			counter++;
+			i++;
 		}
 		if (all_philosophers_satisfied(dinner))
 		{

@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "string": "c"
+        "string": "c",
+        "fork.h": "c"
     }
 }
