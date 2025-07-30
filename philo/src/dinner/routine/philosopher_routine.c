@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:54:53 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/30 17:24:12 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/30 18:07:15 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,18 @@ int	philosopher_eat(t_philosopher *philo)
 		return (0);
 	}
 	philo->status = PHILOSOPHER_EATING;
-	logging_philo_status(philo->dinner, "is eating\n", philo->id);
+	logging_philo_status(
+		philo->dinner,
+		"is eating\n",
+		philo->id
+	);
 	usleep(philo->dinner->time_to_eat_ms * 1000);
 	philo->last_meal_ms = get_time_in_ms();
 	philo->number_of_meals++;
 	release_forks(philo);
 	return (1);
 }
+
 
 int	philosopher_sleep(t_philosopher *philo)
 {
