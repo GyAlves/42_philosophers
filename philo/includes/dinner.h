@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 21:04:06 by galves-a          #+#    #+#             */
-/*   Updated: 2025/07/31 17:42:44 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/31 17:49:24 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,5 @@ void	init_table(t_dinner *dinner);
 void	table_allocation(t_dinner *dinner);
 void	set_up_dinner(t_dinner *dinner);
 void	fork_allocation(t_dinner *dinner, int counter);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:48:17 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/07/30 18:14:01 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:54:35 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	cleanup_threads(t_dinner *dinner)
 	pthread_t	thread_id;
 
 	counter = 0;
+
 	while (counter < dinner->created_threads)
 	{
 		thread_id = dinner->array_philosophers[counter].thread_id;
@@ -34,7 +35,6 @@ void	cleanup_dinner(t_dinner *dinner)
 {
 	if (dinner->created_threads > 0)
 		dinner->dinner_ended = 1;
-	cleanup_threads(dinner);
 	if (dinner->created_forks > 0)
 		mutex_init_error(dinner->created_forks, dinner->array_forks);
 	pthread_mutex_destroy(&dinner->logging_mutex);
