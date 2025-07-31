@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 14:30:05 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/07/30 18:08:47 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/07/31 17:47:57 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		cleanup_dinner(t_dinner *dinner);
 long long	get_time_in_ms(void);
 long long	ft_atoll(char *string);
 void		logging_philo_status(t_dinner *dinner, char *message, int philo_id);
-void		logging_philo_death_status(t_dinner *dinner, int philo_id, long long time_of_death);
+void		logging_philo_death_status(t_dinner *dinner, \
+			int philo_id, long long time_of_death);
 
 #endif

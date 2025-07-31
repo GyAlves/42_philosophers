@@ -2,6 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "string": "c",
-        "fork.h": "c"
+        "fork.h": "c",
+        "philo.h": "c"
     }
 }
