@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/07/30 19:11:50 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:24:18 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	init_table(t_dinner *dinner)
 		fork_allocation(dinner, counter);
 		if (dinner->last_error != SUCCESS)
 			return ;
+		counter++;
+	}
+	counter = 0;
+	while (counter < dinner->number_of_philosophers)
+	{
 		philosopher_allocation(dinner, counter);
 		if (dinner->last_error != SUCCESS)
 			return ;
@@ -72,13 +77,14 @@ void	table_allocation(t_dinner *dinner)
 void	philosopher_allocation(t_dinner *dinner, int counter)
 {
 	t_philosopher	*philo;
+	int				status;
 
 	philo = &dinner->array_philosophers[counter];
 	philo_init(dinner, counter);
 	init_mutex(&philo->death_mutex, dinner);
-	if (pthread_create(&philo->thread_id, NULL,
-			philosopher_routine,
-			philo) != 0)
+	status = pthread_create(&philo->thread_id, NULL, \
+							philosopher_routine, philo)
+		if (status != 0)
 	{
 		dinner->last_error = ERROR_THREAD_CREATE;
 		return ;

@@ -4,5 +4,15 @@
         "string": "c",
         "fork.h": "c",
         "philo.h": "c"
+    },
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "catppuccin-noctis-icons.folders.associations": {
+        "includes": "folder-assets",
+        "src": "folder-app",
+        "objs": "folder-purple",
+        "src/*": "folder-purple-code"
+    },
+    "catppuccin-noctis-icons.files.associations": {
+        "Makefile": "file-config"
     }
 }

@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 00:48:17 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/07/31 19:54:35 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:21:36 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	cleanup_threads(t_dinner *dinner)
 	pthread_t	thread_id;
 
 	counter = 0;
-
 	while (counter < dinner->created_threads)
 	{
 		thread_id = dinner->array_philosophers[counter].thread_id;
