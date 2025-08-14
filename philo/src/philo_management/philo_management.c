@@ -19,7 +19,7 @@ int	is_philosopher_dead(t_philosopher *philo)
 
 	current_time = get_time_in_ms();
 	time_since_last_meal = current_time - philo->last_meal_ms;
-	return (time_since_last_meal > (philo->dinner->time_to_die_ms + 10));
+	return (time_since_last_meal > philo->dinner->time_to_die_ms);
 }
 
 int	read_death_mutex(t_philosopher *philo)
