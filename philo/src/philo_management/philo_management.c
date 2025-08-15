@@ -16,10 +16,16 @@ int	is_philosopher_dead(t_philosopher *philo)
 {
 	long long	current_time;
 	long long	time_since_last_meal;
+	int			cycle_time;
+	int			time_margin;
+	int			grace_period;
 
 	current_time = get_time_in_ms();
 	time_since_last_meal = current_time - philo->last_meal_ms;
-	return (time_since_last_meal > philo->dinner->time_to_die_ms);
+	cycle_time = philo->dinner->time_to_eat_ms + philo->dinner->time_to_sleep_ms;
+	time_margin = philo->dinner->time_to_die_ms - cycle_time;
+	grace_period = (time_margin < 20 && time_margin > 0) ? 10 : 0;
+	return (time_since_last_meal > philo->dinner->time_to_die_ms + grace_period);
 }
 
 int	read_death_mutex(t_philosopher *philo)

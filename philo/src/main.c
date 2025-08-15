@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:27:21 by galves-a          #+#    #+#             */
-/*   Updated: 2025/08/15 19:21:15 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:40:02 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 
 static void	wait_for_threads(t_dinner *dinner)
 {
-	int	i;
-
 	pthread_join(dinner->death_monitor_thread, NULL);
-	i = 0;
-	while (i < dinner->number_of_philosophers)
-	{
-		pthread_join(dinner->array_philosophers[i].thread_id, NULL);
-		i++;
-	}
 }
 
 static void	initialize_dinner(t_dinner *dinner)

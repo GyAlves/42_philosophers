@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/08/15 19:21:15 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:35:47 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	*death_monitor(void *arg)
 			pthread_mutex_lock(&dinner->logging_mutex);
 			printf("All philosophers have eaten enough times\n");
 			pthread_mutex_unlock(&dinner->logging_mutex);
+			usleep(10000);
 			break;
 		}
 		usleep(1000);
