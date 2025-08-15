@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/06/12 19:26:10 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:21:15 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*death_monitor(void *arg)
 	while (!dinner->dinner_ended)
 	{
 		i = 0;
-		while (i < dinner->number_of_philosophers)
+		while (i < dinner->number_of_philosophers && !dinner->dinner_ended)
 		{
 			if (is_philosopher_dead(&dinner->array_philosophers[i]))
 			{
@@ -47,7 +47,7 @@ void	*death_monitor(void *arg)
 			pthread_mutex_unlock(&dinner->logging_mutex);
 			break;
 		}
-		usleep(dinner->time_to_die_ms < 1000 ? 500 : 1000);
+		usleep(1000);
 	}
 	return (dinner);
 }

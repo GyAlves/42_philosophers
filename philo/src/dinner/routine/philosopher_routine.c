@@ -6,7 +6,7 @@
 /*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:54:53 by galves-a          #+#    #+#             */
-/*   Updated: 2025/06/12 19:25:58 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/15 19:31:10 by galves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,24 @@ void	*philosopher_routine(void *arg)
 	t_philosopher	*philo;
 
 	philo = (t_philosopher *)arg;
-	if (philo->dinner->number_of_philosophers == 4 && philo->id % 2 == 1)
+	philo->last_meal_ms = get_time_in_ms();
+	if (philo->dinner->number_of_philosophers == 1)
+	{
+		logging_philo_status(philo->dinner, "is thinking\n", philo->id);
+		logging_philo_status(philo->dinner, "has taken a fork\n", philo->id);
+		while (!philo->dinner->dinner_ended && !read_death_mutex(philo))
+			usleep(1000);
+		return (philo);
+	}
+	if (philo->dinner->number_of_philosophers % 2 == 1 && philo->id == philo->dinner->number_of_philosophers - 1)
+		usleep(philo->dinner->time_to_eat_ms * 1000);
+	else if (philo->id % 2 == 1)
 		usleep(philo->dinner->time_to_eat_ms * 1000 / 2);
 	while (!philo->dinner->dinner_ended && !read_death_mutex(philo))
 	{
 		if (!philosopher_think(philo))
 			break ;
-		if (!philosopher_eat(philo) && philo->dinner->number_of_philosophers > 1)
+		if (!philosopher_eat(philo))
 			break ;
 		if (!philosopher_sleep(philo))
 			break ;
@@ -38,6 +49,8 @@ int	philosopher_think(t_philosopher *philo)
 	if (philo->status != PHILOSOPHER_THINKING)
 		philo->status = PHILOSOPHER_THINKING;
 	logging_philo_status(philo->dinner, "is thinking\n", philo->id);
+	if (philo->dinner->number_of_philosophers > 4)
+		usleep(1000);
 	return (1);
 }
 
