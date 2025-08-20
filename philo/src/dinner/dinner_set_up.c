@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_set_up.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:52:11 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/08/15 19:31:10 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:30:26 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	init_table(t_dinner *dinner)
 		fork_allocation(dinner, counter);
 		if (dinner->last_error != SUCCESS)
 			return ;
+		counter++;
+	}
+	counter = 0;
+	while (counter < dinner->number_of_philosophers)
+	{
 		philosopher_allocation(dinner, counter);
 		if (dinner->last_error != SUCCESS)
 			return ;
@@ -59,8 +64,7 @@ void	table_allocation(t_dinner *dinner)
 		dinner->last_error = ERROR_MALLOC_PHILOSOPHERS;
 		return ;
 	}
-	dinner->array_forks = malloc(sizeof(t_fork)
-			* dinner->number_of_philosophers);
+	dinner->array_forks = malloc(sizeof(t_fork) * dinner->number_of_philosophers);
 	if (!dinner->array_forks)
 	{
 		dinner->last_error = ERROR_MALLOC_FORKS;
@@ -73,7 +77,7 @@ void	philosopher_allocation(t_dinner *dinner, int counter)
 {
 	dinner->array_philosophers[counter].id = counter;
 	dinner->array_philosophers[counter].status = PHILOSOPHER_THINKING;
-	dinner->array_philosophers[counter].last_meal_ms = get_time_in_ms();
+	dinner->array_philosophers[counter].last_meal_ms = dinner->dinner_started_ms;
 	dinner->array_philosophers[counter].number_of_meals = 0;
 	dinner->array_philosophers[counter].is_dead = 0;
 	dinner->array_philosophers[counter].left_fork

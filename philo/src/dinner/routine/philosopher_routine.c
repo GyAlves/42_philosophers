@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_routine.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 21:54:53 by galves-a          #+#    #+#             */
-/*   Updated: 2025/08/15 19:52:52 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:48:09 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*philosopher_routine(void *arg)
 	int				time_margin;
 
 	philo = (t_philosopher *)arg;
-	philo->last_meal_ms = get_time_in_ms();
 	if (philo->dinner->number_of_philosophers == 1)
 	{
 		logging_philo_status(philo->dinner, "is thinking\n", philo->id);
@@ -30,10 +29,12 @@ void	*philosopher_routine(void *arg)
 	}
 	cycle_time = philo->dinner->time_to_eat_ms + philo->dinner->time_to_sleep_ms;
 	time_margin = philo->dinner->time_to_die_ms - cycle_time;
-	if (philo->dinner->number_of_philosophers % 2 == 1 && philo->id == philo->dinner->number_of_philosophers - 1)
+	if ((philo->dinner->number_of_philosophers % 2 == 1 ) && (philo->id == philo->dinner->number_of_philosophers - 1))
 		usleep(philo->dinner->time_to_eat_ms * 1000);
 	else if (philo->id % 2 == 1 && time_margin >= 20)
 		usleep(philo->dinner->time_to_eat_ms * 1000 / 2);
+	if (philo->dinner->number_of_philosophers > 4)
+    	usleep(1000);
 	while (!philo->dinner->dinner_ended && !read_death_mutex(philo))
 	{
 		if (!philosopher_think(philo))
@@ -60,7 +61,7 @@ int	philosopher_think(t_philosopher *philo)
 
 int	philosopher_eat(t_philosopher *philo)
 {
-	if (!philo_vitals(philo))
+	if (philo->dinner->dinner_ended || read_death_mutex(philo))
 		return (0);
 	if (!hold_forks(philo))
 		return (0);
@@ -69,15 +70,10 @@ int	philosopher_eat(t_philosopher *philo)
 		release_forks(philo);
 		return (0);
 	}
-	if (!philo_vitals(philo))
-	{
-		release_forks(philo);
-		return (0);
-	}
 	philo->status = PHILOSOPHER_EATING;
-	philo->last_meal_ms = get_time_in_ms();
 	logging_philo_status(philo->dinner, "is eating\n", philo->id);
 	usleep(philo->dinner->time_to_eat_ms * 1000);
+	philo->last_meal_ms = get_time_in_ms();
 	philo->number_of_meals++;
 	release_forks(philo);
 	return (1);
@@ -95,9 +91,9 @@ int	philosopher_sleep(t_philosopher *philo)
 	sleep_time = philo->dinner->time_to_sleep_ms * 1000;
 	check_interval = 1000;
 	while (sleep_time > 0 && !philo->dinner->dinner_ended)
-	{
-		usleep(check_interval < sleep_time ? check_interval : sleep_time);
-		sleep_time -= check_interval;
-	}
+    {
+        usleep(check_interval < sleep_time ? check_interval : sleep_time);
+        sleep_time -= check_interval;
+    }
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:42:43 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/08/15 19:52:52 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:53:40 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int	is_philosopher_dead(t_philosopher *philo)
 {
 	long long	current_time;
 	long long	time_since_last_meal;
-	int			cycle_time;
-	int			time_margin;
-	int			grace_period;
 
 	current_time = get_time_in_ms();
 	time_since_last_meal = current_time - philo->last_meal_ms;
-	cycle_time = philo->dinner->time_to_eat_ms + philo->dinner->time_to_sleep_ms;
-	time_margin = philo->dinner->time_to_die_ms - cycle_time;
-	grace_period = (time_margin < 20 && time_margin > 0) ? 10 : 0;
-	return (time_since_last_meal > philo->dinner->time_to_die_ms + grace_period);
+	
+	// Only protect if they're eating AND started eating before the deadline
+	if (philo->status == PHILOSOPHER_EATING && 
+		time_since_last_meal <= philo->dinner->time_to_die_ms + 10)
+		return (0);
+		
+	return (time_since_last_meal > philo->dinner->time_to_die_ms);
 }
 
 int	read_death_mutex(t_philosopher *philo)
@@ -49,6 +49,7 @@ int	philo_vitals(t_philosopher *philo)
 {
 	if (philo->dinner->dinner_ended)
 		return (0);
+		
 	if (is_philosopher_dead(philo))
 	{
 		pthread_mutex_lock(&philo->death_mutex);

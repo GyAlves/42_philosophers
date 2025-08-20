@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death_monitor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:00 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/08/15 19:35:47 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:44:51 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	*death_monitor(void *arg)
 			usleep(10000);
 			break;
 		}
-		usleep(1000);
+		usleep(1000); // Small delay to prevent overly aggressive checking
 	}
 	return (dinner);
 }

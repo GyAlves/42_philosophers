@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: galves-a <galves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:48:52 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/08/15 19:21:15 by galves-a         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:12:59 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	release_forks(t_philosopher *philo)
 {
 	if (philo->dinner->number_of_philosophers == 1)
 	{
+		logging_philo_status(philo->dinner, "has taken a fork\n", philo->id);
 		return ;
 	}
 	unlock_fork(philo->right_fork);
