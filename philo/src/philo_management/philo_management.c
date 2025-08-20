@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyasminalves <gyasminalves@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 20:42:43 by gyasminalve       #+#    #+#             */
-/*   Updated: 2025/08/19 21:53:40 by gyasminalve      ###   ########.fr       */
+/*   Created: 2025/08/20 16:19:41 by gyasminalve       #+#    #+#             */
+/*   Updated: 2025/08/20 16:19:44 by gyasminalve      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ int	is_philosopher_dead(t_philosopher *philo)
 	long long	current_time;
 	long long	time_since_last_meal;
 
+	pthread_mutex_lock(&philo->death_mutex);
 	current_time = get_time_in_ms();
 	time_since_last_meal = current_time - philo->last_meal_ms;
-	
-	// Only protect if they're eating AND started eating before the deadline
-	if (philo->status == PHILOSOPHER_EATING && 
-		time_since_last_meal <= philo->dinner->time_to_die_ms + 10)
-		return (0);
+	pthread_mutex_unlock(&philo->death_mutex);
 		
-	return (time_since_last_meal > philo->dinner->time_to_die_ms);
+	return (time_since_last_meal > philo->dinner->time_to_die_ms + 9);
 }
 
 int	read_death_mutex(t_philosopher *philo)

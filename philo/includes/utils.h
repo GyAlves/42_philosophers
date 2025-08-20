@@ -13,20 +13,20 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-/* Functions */
-int		    is_valid_integer_format(char *string);
-int	        ft_atoi(char *string);
-int	        is_valid_philosopher_count(char *string);
-int	        is_valid_time_value(char *string);
-int	        is_valid_meal_count(char *string);
-int         is_valid_integer_format(char *string);
-int	        check_and_report(const char *message);
-void        init_mutex(pthread_mutex_t *mutex, t_dinner *dinner);
-void	    print_usage(void);
-void        cleanup_threads(t_dinner *dinner);
-void        cleanup_dinner(t_dinner *dinner);
-long long   get_time_in_ms(void);
-long long   ft_atoll(char *string);
-void	    logging_philo_status(t_dinner *dinner, char *message, int philo_id);
-void	    logging_philo_death_status(t_dinner *dinner,  int philo_id, long long time_of_death);
+int		is_valid_integer_format(char *string);
+int		ft_atoi(char *string);
+int		is_valid_philosopher_count(char *string);
+int		is_valid_time_value(char *string);
+int		is_valid_meal_count(char *string);
+int		check_and_report(const char *message);
+void	init_mutex(pthread_mutex_t *mutex, t_dinner *dinner);
+void	print_usage(void);
+void	cleanup_threads(t_dinner *dinner);
+void	cleanup_dinner(t_dinner *dinner);
+long long	get_time_in_ms(void);
+void	safe_usleep(unsigned long duration_ms, t_philosopher *philo);
+long long	ft_atoll(char *string);
+void	logging_philo_status(t_dinner *dinner, char *message, int philo_id);
+void	logging_philo_death_status(t_dinner *dinner, int philo_id,
+		long long time_of_death);
 #endif

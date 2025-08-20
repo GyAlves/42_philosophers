@@ -12,35 +12,57 @@
 
 #include "philo.h"
 
+static int	take_even_forks(t_philosopher *philo)
+{
+	lock_fork(philo->left_fork, philo->id);
+	if (philo->dinner->dinner_ended || read_death_mutex(philo))
+	{
+		unlock_fork(philo->left_fork);
+		return (0);
+	}
+	logging_philo_status(philo->dinner, "has taken a fork\n", philo->id);
+	lock_fork(philo->right_fork, philo->id);
+	if (philo->dinner->dinner_ended || read_death_mutex(philo))
+	{
+		unlock_fork(philo->right_fork);
+		unlock_fork(philo->left_fork);
+		return (0);
+	}
+	logging_philo_status(philo->dinner, "has taken a fork\n", philo->id);
+	return (1);
+}
+
+static int	take_odd_forks(t_philosopher *philo)
+{
+	usleep(5000);
+	lock_fork(philo->right_fork, philo->id);
+	if (philo->dinner->dinner_ended || read_death_mutex(philo))
+	{
+		unlock_fork(philo->right_fork);
+		return (0);
+	}
+	logging_philo_status(philo->dinner, "has taken a fork\n", philo->id);
+	lock_fork(philo->left_fork, philo->id);
+	if (philo->dinner->dinner_ended || read_death_mutex(philo))
+	{
+		unlock_fork(philo->left_fork);
+		unlock_fork(philo->right_fork);
+		return (0);
+	}
+	logging_philo_status(philo->dinner, "has taken a fork\n", philo->id);
+	return (1);
+}
+
 int	hold_forks(t_philosopher *philo)
 {
 	if (philo->dinner->dinner_ended || read_death_mutex(philo))
 		return (0);
 	if (philo->dinner->number_of_philosophers == 1)
-	{
 		return (0);
-	}
 	if (philo->id % 2 == 0)
-	{
-		lock_fork(philo->left_fork, philo->id);
-		if (philo->dinner->dinner_ended || read_death_mutex(philo))
-		{
-			unlock_fork(philo->left_fork);
-			return (0);
-		}
-		lock_fork(philo->right_fork, philo->id);
-	}
+		return (take_even_forks(philo));
 	else
-	{
-		lock_fork(philo->right_fork, philo->id);
-		if (philo->dinner->dinner_ended || read_death_mutex(philo))
-		{
-			unlock_fork(philo->right_fork);
-			return (0);
-		}
-		lock_fork(philo->left_fork, philo->id);
-	}
-	return (1);
+		return (take_odd_forks(philo));
 }
 
 void	lock_fork(t_fork *fork, int philo_id)

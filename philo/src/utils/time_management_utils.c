@@ -21,3 +21,17 @@ long long	get_time_in_ms(void)
 	time_in_ms = (timestamp.tv_sec * 1000) + (timestamp.tv_usec / 1000);
 	return (time_in_ms);
 }
+
+void	safe_usleep(unsigned long duration_ms, t_philosopher *philo)
+{
+	unsigned long	start;
+	unsigned long	elapsed;
+
+	start = get_time_in_ms();
+	while ((elapsed = get_time_in_ms() - start) < duration_ms)
+	{
+		if (philo->dinner->dinner_ended || read_death_mutex(philo))
+			return ;
+		usleep(5);
+	}
+}
